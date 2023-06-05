@@ -11,9 +11,10 @@ add_executable(${PROJECT_NAME} ${SOURCES})
 set_target_properties(${PROJECT_NAME} PROPERTIES
     CXX_STANDARD 20
     CXX_STANDARD_REQUIRED ON
-    COMPILE_OPTIONS "-Wpedantic;-Wall;-Wextra;-fconcept"
+    COMPILE_OPTIONS "-Wpedantic;-Wall;-Wextra"
 )
 
-target_link_libraries(${PROJECT_NAME})
+target_include_directories(${PROJECT_NAME} PRIVATE ${AGAME_MECH_INCLUDE})
+target_link_libraries(${PROJECT_NAME} agame_mech)
 
 install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION tests)

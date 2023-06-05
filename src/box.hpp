@@ -3,17 +3,23 @@
 
 class Box {
 public:
+    Box() = delete;
     explicit Box(double initial_weight)
       : weight_(initial_weight) {}
+    virtual ~Box() = default;
     bool operator<(const Box& rhs) const { return weight_ < rhs.weight_; }
 
-    static std::unique_ptr<Box> makeGreenBox(double initial_weight);
-    static std::unique_ptr<Box> makeBlueBox(double initial_weight);
-
     virtual void absorb(double token_weight) = 0;
-    virtual double score() = 0;
+    double score() { return weight_; }
 
 protected:
     double weight_;
 };
 
+template<typename T>
+concept BoxInstance = std::is_base_of<Box, T>::value;
+
+template<BoxInstance T>
+std::unique_ptr<Box> makeBox(double initial_weight) {
+    return std::make_unique<T>(initial_weight);
+}
