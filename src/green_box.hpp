@@ -3,8 +3,8 @@
 #include <queue>
 
 class GreenBox : public Box {
-private:
-    double current_weight() const;
+public:
+    static double mean_square(std::queue<double> tmp_buf);
 public:
     GreenBox() = delete;
     explicit GreenBox(double initial_weight);

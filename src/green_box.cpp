@@ -1,9 +1,8 @@
 #include "green_box.hpp"
 
-double GreenBox::current_weight() const {
+double GreenBox::mean_square(std::queue<double> tmp_buf) {
     double mean = 0.0;
-    auto tmp_buf = token_buf_;
-    size_t size = tmp_buf.size();
+    double size = tmp_buf.size();
     while (!tmp_buf.empty()) {
         mean += tmp_buf.front();
         tmp_buf.pop();
@@ -21,5 +20,5 @@ void GreenBox::absorb(double token_weight) {
     if (token_buf_.size() > 3) {
         token_buf_.pop();
     }
-    weight_ = current_weight();
+    weight_ = mean_square(token_buf_);
 }

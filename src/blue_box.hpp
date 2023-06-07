@@ -3,8 +3,7 @@
 
 class BlueBox : public Box {
 public:
-    static int cantor(int x, int y);
-    static double cantord(double x, double y);
+    static double cantor(double x, double y);
 public:
     BlueBox() = delete;
     explicit BlueBox(double initial_weight);
