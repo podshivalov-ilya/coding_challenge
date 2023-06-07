@@ -8,8 +8,9 @@ public:
     BlueBox() = delete;
     explicit BlueBox(double initial_weight);
 
-    void absorb(double token_weight) override;
+    double absorb(double token_weight) override;
 private:
     double min_weight_;
     double max_weight_;
+    bool is_initialized_;
 };

@@ -25,25 +25,25 @@ TEST_CASE("Test mean square function") {
 
 TEST_CASE("Test absorption of green box", "[green]") {
     GreenBox green_box(0.0);
-    REQUIRE(green_box.score() == Approx(0.0));
+    REQUIRE(green_box.weight() == Approx(0.0));
     green_box.absorb(0.1);
     green_box.absorb(0.2);
-    green_box.absorb(0.3);
-    REQUIRE(green_box.score() == Approx(0.2 * 0.2));
-    green_box.absorb(0.4);
-    REQUIRE(green_box.score() == Approx(0.3 * 0.3));
+    double score = green_box.absorb(0.3);
+    REQUIRE(score == Approx(0.2 * 0.2));
+    score = green_box.absorb(0.4);
+    REQUIRE(score == Approx(0.3 * 0.3));
 }
 
 TEST_CASE("Test absorption of blue box", "[blue]") {
     BlueBox blue_box(0.2);
-    REQUIRE(blue_box.score() == Approx(0.2));
+    REQUIRE(blue_box.weight() == Approx(0.2));
     blue_box.absorb(3.0);
-    blue_box.absorb(2.0);
-    REQUIRE(blue_box.score() == BlueBox::cantor(0.2, 3.0));
-    blue_box.absorb(1.0);
-    REQUIRE(blue_box.score() == BlueBox::cantor(0.2, 3.0));
-    blue_box.absorb(4.0);
-    REQUIRE(blue_box.score() == BlueBox::cantor(0.2, 4.0));
+    double score = blue_box.absorb(2.0);
+    REQUIRE(score == BlueBox::cantor(2.0, 3.0));
+    score = blue_box.absorb(1.0);
+    REQUIRE(score == BlueBox::cantor(1.0, 3.0));
+    score = blue_box.absorb(4.0);
+    REQUIRE(score == BlueBox::cantor(1.0, 4.0));
 }
 
 TEST_CASE("Test Box polymorphism") {
@@ -52,13 +52,13 @@ TEST_CASE("Test Box polymorphism") {
 
     blue_box->absorb(3.0);
     blue_box->absorb(2.0);
-    blue_box->absorb(1.0);
-    REQUIRE(blue_box->score() == BlueBox::cantor(0.2, 3.0));
+    double score = blue_box->absorb(1.0);
+    REQUIRE(score == BlueBox::cantor(1.0, 3.0));
 
     green_box->absorb(0.1);
     green_box->absorb(0.2);
-    green_box->absorb(0.3);
-    REQUIRE(green_box->score() == Approx(0.2 * 0.2));
+    score = green_box->absorb(0.3);
+    REQUIRE(score == Approx(0.2 * 0.2));
 }
 
 TEST_CASE("Final scores for first 4 Fibonacci numbers", "[fibonacci4]") {

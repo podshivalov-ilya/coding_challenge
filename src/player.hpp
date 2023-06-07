@@ -13,8 +13,7 @@ public:
                                                [] (const std::unique_ptr<Box>& a, const std::unique_ptr<Box>& b)
                                                { return *a < *b; });
         Box* box = smallest_box_it->get();
-        box->absorb(input_weight);
-        score_ += box->score();
+        score_ += box->absorb(input_weight);
     }
     double getScore() const { return score_; }
 

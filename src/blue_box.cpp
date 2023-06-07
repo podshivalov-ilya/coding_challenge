@@ -7,12 +7,19 @@ double BlueBox::cantor(double x, double y) {
 
 BlueBox::BlueBox(double initial_weight)
     : Box(initial_weight),
-    min_weight_(initial_weight),
-    max_weight_(initial_weight) {}
+    min_weight_(0.0),
+    max_weight_(0.0),
+    is_initialized_(false) {}
 
-void BlueBox::absorb(double token_weight) {
+double BlueBox::absorb(double token_weight) {
+    weight_ += token_weight;
+    if (!is_initialized_) {
+        min_weight_ = token_weight;
+        max_weight_ = token_weight;
+        is_initialized_ = true;
+    }
     min_weight_ = std::min(min_weight_, token_weight);
     max_weight_ = std::max(max_weight_, token_weight);
-    weight_ = BlueBox::cantor(min_weight_, max_weight_);
+    return BlueBox::cantor(min_weight_, max_weight_);
 }
 

@@ -8,7 +8,7 @@ public:
 public:
     GreenBox() = delete;
     explicit GreenBox(double initial_weight);
-    void absorb(double token_weight) override;
+    double absorb(double token_weight) override;
 private:
     std::queue<double> token_buf_;
 };

@@ -9,8 +9,8 @@ public:
     virtual ~Box() = default;
     bool operator<(const Box& rhs) const { return weight_ < rhs.weight_; }
 
-    virtual void absorb(double token_weight) = 0;
-    double score() { return weight_; }
+    virtual double absorb(double token_weight) = 0;
+    double weight() const { return weight_; }
 
 protected:
     double weight_;
