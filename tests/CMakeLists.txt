@@ -14,6 +14,10 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
     COMPILE_OPTIONS "-Wpedantic;-Wall;-Wextra"
 )
 
+target_compile_options(${PROJECT_NAME}
+    INTERFACE
+        "$<$<COMPILE_LANG_AND_ID:CXX,GNU>:-fconcepts>"
+)
 target_include_directories(${PROJECT_NAME} PRIVATE ${AGAME_MECH_INCLUDE})
 target_link_libraries(${PROJECT_NAME} agame_mech)
 

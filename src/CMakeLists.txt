@@ -14,6 +14,11 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
     COMPILE_OPTIONS "-Wpedantic;-Wall;-Wextra"
 )
 
+target_compile_options(${PROJECT_NAME}
+    INTERFACE
+        "$<$<COMPILE_LANG_AND_ID:CXX,GNU>:-fconcepts>"
+)
+
 target_link_libraries(${PROJECT_NAME})
 
 install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION lib)
