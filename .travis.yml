@@ -1,6 +1,0 @@
-language: cpp
-compiler: gcc
-script:
-  - cmake .
-  - cmake --build .
-  - ./tests/agame_test
